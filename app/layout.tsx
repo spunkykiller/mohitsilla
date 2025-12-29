@@ -39,7 +39,7 @@ export default function RootLayout({
                 className={`${inter.variable} ${ibmPlexSans.variable} font-sans bg-background text-foreground antialiased selection:bg-white selection:text-black`}
             >
                 <div className="min-h-screen flex flex-col items-center">
-                    <main className="w-full max-w-[640px] px-6 py-12 md:py-20 flex flex-col gap-16 md:gap-24">
+                    <main className="w-full max-w-5xl px-6 py-12 md:py-20 flex flex-col gap-16 md:gap-24">
                         {children}
                     </main>
                 </div>
