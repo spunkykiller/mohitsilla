@@ -56,12 +56,6 @@ const organizations = [
     },
 ];
 
-const ecosystems = [
-    "Companies worked with",
-    "Communities built or operated",
-    "Agencies / studios involved in",
-];
-
 function ProjectCard({ project }: { project: typeof projects[0] }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -170,6 +164,13 @@ export default function Home() {
 
                 <div className="flex flex-wrap gap-4 mt-2">
                     <Link
+                        href="mailto:mohitsilla@wne3.com"
+                        className="flex items-center gap-2.5 px-5 py-2.5 bg-[#111111] border border-neutral-800 rounded-lg text-secondary hover:text-white hover:border-neutral-600 transition-all group"
+                    >
+                        <Mail className="w-4 h-4 opacity-70 group-hover:opacity-100" />
+                        <span className="text-sm font-medium">Email</span>
+                    </Link>
+                    <Link
                         href="https://www.linkedin.com/in/mohitsilla/"
                         target="_blank"
                         className="flex items-center gap-2.5 px-5 py-2.5 bg-[#111111] border border-neutral-800 rounded-lg text-secondary hover:text-white hover:border-neutral-600 transition-all group"
@@ -241,18 +242,6 @@ export default function Home() {
                         <ProjectCard key={index} project={project} />
                     ))}
                 </div>
-            </section>
-
-            {/* Organizations & Experience */}
-            <section className="flex flex-col gap-8">
-                <h2 className="text-foreground text-xs font-bold tracking-widest uppercase text-opacity-50">History</h2>
-                <ul className="flex flex-col gap-3">
-                    {ecosystems.map((item, index) => (
-                        <li key={index} className="text-secondary flex items-center gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-neutral-800"></span>{item}
-                        </li>
-                    ))}
-                </ul>
             </section>
 
             {/* Online Presence */}
