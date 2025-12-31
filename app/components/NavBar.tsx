@@ -69,7 +69,7 @@ export default function NavBar() {
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
                     )}
-                    <span className="relative z-10 mix-blend-exclusion">{item.name}</span>
+                    <span className="relative z-10">{item.name}</span>
                 </Link>
             ))}
         </motion.nav>
