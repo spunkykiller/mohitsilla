@@ -179,7 +179,7 @@ export default function Home() {
                         <span className="text-sm font-medium">LinkedIn</span>
                     </Link>
                     <Link
-                        href="https://github.com/spunkykiller"
+                        href="https://github.com/spunkykiller/"
                         target="_blank"
                         className="flex items-center gap-2.5 px-5 py-2.5 bg-[#111111] border border-neutral-800 rounded-lg text-secondary hover:text-white hover:border-neutral-600 transition-all group"
                     >
