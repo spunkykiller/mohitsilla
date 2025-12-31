@@ -146,8 +146,8 @@ export default function Home() {
                     <Image
                         src="/images/profile.jpg"
                         alt="Mohit Silla"
-                        width={88}
-                        height={88}
+                        width={120}
+                        height={120}
                         className="rounded-full opacity-90 mb-2 grayscale hover:grayscale-0 transition-all duration-500"
                         priority
                     />
