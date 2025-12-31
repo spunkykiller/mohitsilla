@@ -34,7 +34,7 @@ const projects = [
         description: "De-couples physical presence from information retention by automating meeting recording and local archival via OBS.",
         link: "https://github.com/spunkykiller/AutoMeet_OBS",
         image: "/images/automeet.png",
-        tech: ["OBS Scripting", "Automation", "Local Archival"],
+        tech: ["Automation", "Local Archival"],
     },
 ];
 
