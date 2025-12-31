@@ -3,6 +3,7 @@ import { Inter, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
 import NavBar from "./components/NavBar";
+import BackgroundSpotlight from "./components/BackgroundSpotlight";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -41,6 +42,7 @@ export default function RootLayout({
                 className={`${inter.variable} ${ibmPlexSans.variable} font-sans bg-background text-foreground antialiased selection:bg-white selection:text-black`}
             >
                 <SmoothScroll />
+                <BackgroundSpotlight />
                 <NavBar />
                 <div className="min-h-screen flex flex-col items-center">
                     <main className="w-full max-w-5xl px-6 py-12 md:py-20 flex flex-col gap-16 md:gap-24">
