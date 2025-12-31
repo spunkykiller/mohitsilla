@@ -51,7 +51,7 @@ const organizations = [
     },
     {
         name: "wne3.com",
-        description: "Building decentralized infrastructure and operational systems for the new web.",
+        description: "Building the future of commerce with Generative AI. Enabling users to create exactly what they want, instantly, using prompts.",
         link: "https://wne3.com/",
     },
 ];
@@ -146,8 +146,8 @@ export default function Home() {
                     <Image
                         src="/images/profile.jpg"
                         alt="Mohit Silla"
-                        width={120}
-                        height={120}
+                        width={160}
+                        height={160}
                         className="rounded-full opacity-90 mb-2 grayscale hover:grayscale-0 transition-all duration-500"
                         priority
                     />
