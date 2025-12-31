@@ -19,7 +19,7 @@ const projects = [
         description: "A Python-powered analytics tool that extracts and analyzes 3,484+ trading signals to identify optimal timing patterns.",
         link: "https://github.com/spunkykiller/Trading-Signal-Analyzer",
         image: "/images/telegram-analyzer.png",
-        tech: ["Python", "BeautifulSoup", "Data Visualization"],
+        tech: ["Python", "Data Visualization"],
     },
     {
         name: "WhatsApp Chat Intelligence",
@@ -242,6 +242,11 @@ export default function Home() {
                         <ProjectCard key={index} project={project} />
                     ))}
                 </div>
+            </section>
+
+            {/* 8n8 Based Projects */}
+            <section id="n8n-projects" className="flex flex-col gap-8">
+                <h2 className="text-foreground text-xs font-bold tracking-widest uppercase text-opacity-50">8n8 Based Projects</h2>
             </section>
         </div>
     );
