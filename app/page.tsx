@@ -244,22 +244,9 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Online Presence */}
-            <section className="flex flex-col gap-8">
-                <h2 className="text-foreground text-xs font-bold tracking-widest uppercase text-opacity-50">Contact</h2>
-                <a href="mailto:contact@mohitsilla.com" className="w-fit flex items-center gap-3 text-secondary hover:text-white transition-colors group">
-                    <div className="p-3 rounded-full bg-[#111111] border border-neutral-800 group-hover:border-neutral-600 transition-colors">
-                        <Mail className="w-5 h-5" />
-                    </div>
-                    <span className="text-lg">contact@mohitsilla.com</span>
-                </a>
-            </section>
 
-            {/* Footer */}
-            <footer className="mt-20 pt-8 border-t border-neutral-900 text-[10px] tracking-widest uppercase text-neutral-600 flex justify-between items-center">
-                <p>System Online</p>
-                <p>© 2025</p>
-            </footer>
+
+
         </div>
     );
 }
