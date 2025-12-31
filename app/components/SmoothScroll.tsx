@@ -7,13 +7,13 @@ export default function SmoothScroll() {
     useEffect(() => {
         // Initialize Lenis with settings for smooth, momentum-based scrolling
         const lenis = new Lenis({
-            duration: 1.5, // Increased slightly for more noticeable smoothness
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            duration: 2.5, // Much higher duration for luxurious smooth feel
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Keep exponential easing but longer duration
             orientation: "vertical",
             gestureOrientation: "vertical",
             smoothWheel: true,
-            wheelMultiplier: 1,
-            touchMultiplier: 2,
+            wheelMultiplier: 0.8, // Slightly lower sensitivity for weightier feel
+            touchMultiplier: 1.5,
         });
 
         // Explicitly add 'lenis' class to html just in case
