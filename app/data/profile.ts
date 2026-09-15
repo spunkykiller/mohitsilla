@@ -82,8 +82,8 @@ export const selectedWork: SelectedWork[] = [
       "Website and product updates, with a public case study documenting search visibility.",
     href: "https://gensync.us/case-studies/seo/connectme",
     linkLabel: "View the case study",
-    image: "/images/connectme-website.jpg",
-    imageAlt: "ConnectME website presenting its IoT products and services",
+    image: "/images/connectme-work.webp",
+    imageAlt: "ConnectME product catalogue for smart meters and IoT gateways",
   },
   {
     id: "api-key-health",
@@ -97,19 +97,23 @@ export const selectedWork: SelectedWork[] = [
       "Credential management with scheduled provider checks and usage visibility where available.",
     href: "https://apikeyhealth.com/",
     linkLabel: "Explore the product",
+    image: "/images/api-key-health-dashboard.png",
+    imageAlt: "API Key Health workspace dashboard",
   },
   {
-    id: "gensync-crm",
-    title: "GenSync CRM",
-    kicker: "Internal tool",
+    id: "gensync-systems",
+    title: "GenSync operating systems",
+    kicker: "Operations · GenSync",
     summary:
-      "A shared workspace for the tasks and handoffs behind a creative and technical team.",
+      "The delivery layer behind GenSync’s websites, product films and growth systems.",
     role:
-      "I built the dashboard and connected team tasks to Google Sheets.",
+      "I built the internal dashboard, connected team tasks to Google Sheets and coordinated client delivery.",
     outcome:
-      "A dashboard and task workspace with Google Sheets integration, plus client and pipeline views.",
-    href: "https://gensync.us/portfolio",
-    linkLabel: "View the GenSync portfolio",
+      "A shared CRM, client and pipeline views, and task handoffs from intake through delivery.",
+    href: "https://gensync.us/",
+    linkLabel: "Visit the GenSync website",
+    image: "/images/gensync-public-site.png",
+    imageAlt: "GenSync’s public website showing its launch, film and growth systems work",
   },
 ];
 

@@ -13,7 +13,7 @@ export default function SiteHeader() {
     <header className="site-header">
       <div className="site-header-inner">
         <Link href="/" className="site-mark" aria-label="Mohit Silla, home">
-          MS<span className="mark-dot" aria-hidden="true" />
+          Mohit Silla<span className="mark-dot" aria-hidden="true" />
         </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
