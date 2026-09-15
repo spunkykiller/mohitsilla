@@ -1,323 +1,129 @@
-"use client";
-
 import Image from "next/image";
-import { ArrowUpRight, Play, X, Github, Linkedin, Mail, AlertTriangle } from "lucide-react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import MagneticButton from "./components/MagneticButton";
-import Spotlight from "./components/Spotlight";
+import { community, episodes, experience, profile, selectedWork } from "./data/profile";
 
-const projects = [
-    {
-        name: "Spotify AI Agent",
-        description: "A conversational AI-powered web application that transforms Spotify playlist management through natural language commands.",
-        link: "https://github.com/spunkykiller/spotify-agent",
-        youtubeId: "GXdZ3hmpd30",
-        tech: ["Next.js 16", "React 19", "Spotify API", "Google Assistant"],
-    },
-    {
-        name: "Telegram Trading Signal Analyzer",
-        description: "A Python-powered analytics tool that extracts and analyzes 3,484+ trading signals to identify optimal timing patterns.",
-        link: "https://github.com/spunkykiller/Trading-Signal-Analyzer",
-        image: "/images/telegram-analyzer.png",
-        tech: ["Python", "Data Visualization"],
-    },
-    {
-        name: "WhatsApp Chat Intelligence",
-        description: "A privacy-first analytics portal that transforms chaotic WhatsApp group chats into a structured dashboard for discovering opportunities.",
-        link: "https://github.com/spunkykiller/WhatsApp-Chat-Intelligence",
-        youtubeId: "1YTM52-x9X8",
-        image: "/images/whatsapp-chat.png",
-        tech: ["Privacy-First", "Analytics", "React"],
-    },
-    {
-        name: "AutoMeet Recorder",
-        description: "De-couples physical presence from information retention by automating meeting recording and local archival via OBS.",
-        link: "https://github.com/spunkykiller/AutoMeet_OBS",
-        image: "/images/automeet.png",
-        tech: ["Automation", "Local Archival"],
-    },
-];
+const externalProps = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-const organizations = [
-    {
-        name: "Build Club",
-        description: "A community and podcast platform focused on builders, founders, and operators.",
-        link: "https://thebuildclub.in/",
-    },
-    {
-        name: "GenSync",
-        description: "A creative & growth agency working across content, branding, and media systems.",
-        link: "https://gensync.in/",
-    },
-    {
-        name: "wne3.com",
-        description: "Building the future of commerce with Generative AI. Enabling users to create exactly what they want, instantly, using prompts.",
-        link: "https://wne3.com/",
-    },
-];
-
-function ProjectCard({ project }: { project: typeof projects[0] }) {
-    const [isOpen, setIsOpen] = useState(false);
-
-    return (
-        <Spotlight className="group/card rounded-2xl bg-[#111111]">
-            <div className="flex flex-col gap-4 p-6 relative z-10 transition-colors">
-                <div className="flex flex-col gap-3">
-                    <div className="flex justify-between items-start">
-                        <Link
-                            href={project.link}
-                            target="_blank"
-                            className="flex items-center gap-2 text-foreground font-medium hover:text-accent transition-colors text-lg group"
-                        >
-                            {project.name} <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </Link>
-                        {(project.youtubeId || project.image) && (
-                            <button
-                                onClick={() => setIsOpen(!isOpen)}
-                                className="px-3 py-1.5 text-xs font-medium bg-neutral-900 text-secondary hover:text-foreground rounded-full border border-neutral-800 transition-colors flex items-center gap-1.5"
-                            >
-                                {isOpen ? (
-                                    <>
-                                        <X className="w-3 h-3" /> Close Demo
-                                    </>
-                                ) : (
-                                    <>
-                                        <Play className="w-3 h-3" /> Watch Demo
-                                    </>
-                                )}
-                            </button>
-                        )}
-                    </div>
-                    <p className="text-secondary text-sm leading-relaxed max-w-prose">
-                        {project.description}
-                    </p>
-                    <div className="flex gap-2 flex-wrap">
-                        {project.tech?.map((t) => (
-                            <span
-                                key={t}
-                                className="text-[10px] uppercase tracking-wider text-neutral-500 bg-neutral-900 px-2 py-1 rounded-md border border-neutral-800/50"
-                            >
-                                {t}
-                            </span>
-                        ))}
-                    </div>
-                </div>
-
-                <AnimatePresence>
-                    {isOpen && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                            className="overflow-hidden rounded-xl mt-2"
-                        >
-                            {project.youtubeId ? (
-                                <div className="relative w-full aspect-video bg-black rounded-xl overflow-hidden border border-neutral-800">
-                                    <iframe
-                                        src={`https://www.youtube.com/embed/${project.youtubeId}?autoplay=1`}
-                                        title={project.name}
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                        className="absolute top-0 left-0 w-full h-full"
-                                    />
-                                </div>
-                            ) : project.image ? (
-                                <div className="relative w-full aspect-video bg-black rounded-xl overflow-hidden border border-neutral-800">
-                                    <Image
-                                        src={project.image}
-                                        alt={project.name}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                            ) : null}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </Spotlight>
-    );
-}
-
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.1,
-            delayChildren: 0.2, // Small initial delay
-        },
-    },
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
-export default function Home() {
-    return (
-        <div className="flex flex-col gap-24 md:gap-32 pb-10 w-full max-w-4xl mx-auto">
-            {/* Hero Section - Staggered Entrance */}
-            <motion.section
-                className="flex flex-col gap-8 max-w-2xl"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-            >
-                <div className="flex flex-col gap-6">
-                    <motion.div variants={itemVariants}>
-                        <Image
-                            src="/images/profile.jpg"
-                            alt="Mohit Silla"
-                            width={160}
-                            height={160}
-                            className="rounded-full opacity-90 mb-2 grayscale hover:grayscale-0 transition-all duration-500"
-                            priority
-                        />
-                    </motion.div>
-                    <motion.h1 variants={itemVariants} className="text-foreground text-xl font-medium tracking-tight">
-                        I’m Mohit Silla.
-                    </motion.h1>
-                    <motion.div variants={itemVariants} className="flex flex-col gap-4">
-                        <p className="text-secondary text-lg max-w-prose leading-relaxed">
-                            Developer and core operator building end-to-end systems.
-                        </p>
-                        <p className="text-secondary text-base max-w-prose leading-relaxed opacity-80">
-                            I operate at the intersection of AI, automation, and infrastructure. Everything I build solves a real problem and runs in production.
-                        </p>
-                    </motion.div>
-                </div>
-
-                <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mt-2">
-                    <MagneticButton>
-                        <Link
-                            href="mailto:mohitsilla@wne3.com"
-                            className="flex items-center gap-2.5 px-5 py-2.5 bg-[#111111] border border-neutral-800 rounded-lg text-secondary hover:text-white hover:border-neutral-600 transition-all group"
-                        >
-                            <Mail className="w-4 h-4 opacity-70 group-hover:opacity-100" />
-                            <span className="text-sm font-medium">Email</span>
-                        </Link>
-                    </MagneticButton>
-                    <MagneticButton>
-                        <Link
-                            href="https://www.linkedin.com/in/mohitsilla/"
-                            target="_blank"
-                            className="flex items-center gap-2.5 px-5 py-2.5 bg-[#111111] border border-neutral-800 rounded-lg text-secondary hover:text-white hover:border-neutral-600 transition-all group"
-                        >
-                            <Linkedin className="w-4 h-4 opacity-70 group-hover:opacity-100" />
-                            <span className="text-sm font-medium">LinkedIn</span>
-                        </Link>
-                    </MagneticButton>
-                    <MagneticButton>
-                        <Link
-                            href="https://github.com/spunkykiller/"
-                            target="_blank"
-                            className="flex items-center gap-2.5 px-5 py-2.5 bg-[#111111] border border-neutral-800 rounded-lg text-secondary hover:text-white hover:border-neutral-600 transition-all group"
-                        >
-                            <Github className="w-4 h-4 opacity-70 group-hover:opacity-100" />
-                            <span className="text-sm font-medium">GitHub</span>
-                        </Link>
-                    </MagneticButton>
-                </motion.div>
-            </motion.section>
-
-            {/* What I Do Section */}
-            <motion.section
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
-                className="flex flex-col gap-8"
-            >
-                <h2 className="text-foreground text-xs font-bold tracking-widest uppercase text-opacity-50">
-                    Core Competencies
-                </h2>
-                <ul className="flex flex-col gap-3">
-                    {[
-                        "End-to-end software systems",
-                        "AI tools & local LLM workflows",
-                        "Automation & internal tooling",
-                        "Media + content infrastructure",
-                        "Growth & operational systems",
-                    ].map((item, index) => (
-                        <motion.li
-                            key={index}
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1, duration: 0.4 }}
-                            className="text-secondary hover:text-foreground transition-colors cursor-default text-lg"
-                        >
-                            <span className="mr-4 opacity-20 text-sm">0{index + 1}</span> {item}
-                        </motion.li>
-                    ))}
-                </ul>
-            </motion.section>
-
-            {/* Active Work & Platforms */}
-            <section id="work" className="flex flex-col gap-8">
-                <h2 className="text-foreground text-xs font-bold tracking-widest uppercase text-opacity-50">
-                    Active Ecosystems
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {organizations.map((org, index) => (
-                        <Spotlight key={index} className="rounded-2xl">
-                            <Link href={org.link} target="_blank" className="group block h-full relative z-10">
-                                <div className="h-full flex flex-col gap-3 p-6 group-hover:bg-[#161616]/50 transition-all duration-300 rounded-2xl">
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-foreground font-medium text-lg group-hover:text-white transition-colors">
-                                            {org.name}
-                                        </span>
-                                        <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                                    </div>
-                                    <p className="text-secondary text-sm leading-relaxed">{org.description}</p>
-                                </div>
-                            </Link>
-                        </Spotlight>
-                    ))}
-                </div>
-            </section>
-
-            {/* Projects Section */}
-            <section id="projects" className="flex flex-col gap-8">
-                <h2 className="text-foreground text-xs font-bold tracking-widest uppercase text-opacity-50">
-                    Production Systems
-                </h2>
-                <div className="grid grid-cols-1 gap-6">
-                    {projects.map((project, index) => (
-                        <ProjectCard key={index} project={project} />
-                    ))}
-                </div>
-            </section>
-
-            {/* 8n8 Based Projects - Sync Error Placeholder */}
-            <section id="n8n-projects" className="flex flex-col gap-8">
-                <h2 className="text-foreground text-xs font-bold tracking-widest uppercase text-opacity-50">
-                    8n8 Based Projects
-                </h2>
-                <div className="w-full p-8 border border-neutral-800/60 bg-[#111111]/40 rounded-2xl flex flex-col items-center justify-center gap-4 min-h-[180px] text-center border-dashed">
-                    <div className="flex items-center gap-2 text-red-500/80 animate-pulse">
-                        <AlertTriangle className="w-5 h-5" />
-                        <span className="font-mono text-sm tracking-widest uppercase font-bold">Sync Error</span>
-                    </div>
-                    <p className="font-mono text-xs text-secondary/60 max-w-sm">
-                        [System Notification]: Connection to 8n8 node pending... <br />
-                        Data stream interrupted. Retrying handshake in 3... 2...
-                    </p>
-                </div>
-            </section>
-
-            {/* Footer */}
-            <footer className="mt-12 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-neutral-900 pt-8 text-neutral-600 text-sm">
-                <p>© {new Date().getFullYear()} Mohit Silla.</p>
-                <div className="flex items-center gap-6">
-                    <span className="opacity-50">Crafted by Mohit</span>
-                </div>
-            </footer>
+export default function HomePage() {
+  return (
+    <>
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-copy">
+          <p className="eyebrow">{profile.name} · {profile.role}</p>
+          <h1 id="hero-title">{profile.headline}</h1>
+          <p className="hero-intro">{profile.intro}</p>
+          <div className="hero-actions" aria-label="Primary links">
+            <a className="button button-primary" href={`mailto:${profile.email}`}>Start a conversation</a>
+            <a className="button button-secondary" href={profile.linkedin} {...externalProps}>LinkedIn <span aria-hidden="true">↗</span></a>
+          </div>
+          <div className="affiliations" aria-label="Current affiliations">
+            <a href="https://gensync.us/" {...externalProps}><span>Operating</span>GenSync <span aria-hidden="true">↗</span></a>
+            <a href="https://thebuildclub.in/" {...externalProps}><span>Hosting</span>The Build Club <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
-    );
+        <figure className="portrait-frame">
+          <Image src="/images/profile.jpg" alt="Mohit Silla outdoors beside carved stone architecture" width={600} height={600} priority sizes="(max-width: 780px) 100vw, 38vw" />
+          <figcaption>Builder · Operator · Host</figcaption>
+        </figure>
+      </section>
+
+      <section className="section" id="work" aria-labelledby="work-title">
+        <div className="section-heading">
+          <p className="section-number" aria-hidden="true">01</p>
+          <div><p className="eyebrow">Selected work</p><h2 id="work-title">Products and systems I helped make real.</h2></div>
+          <Link href="/experiments" className="section-link">See experiments <span aria-hidden="true">→</span></Link>
+        </div>
+        <div className="work-list">
+          {selectedWork.map((item, index) => (
+            <article className={`work-entry${item.image ? " work-entry-featured" : ""}`} key={item.id}>
+              <div className="work-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</div>
+              <div className="work-copy">
+                <p className="eyebrow">{item.kicker}</p><h3>{item.title}</h3><p className="work-summary">{item.summary}</p>
+                <dl className="work-details">
+                  <div><dt>What I owned</dt><dd>{item.role}</dd></div>
+                  <div><dt>What shipped</dt><dd>{item.outcome}</dd></div>
+                </dl>
+                <div className="inline-links">
+                  <a href={item.href} className="text-link" {...externalProps}>{item.linkLabel} <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+              {item.image && <a href={item.href} className="work-image" aria-label={`${item.linkLabel} for ${item.title}`} {...externalProps}><Image src={item.image} alt={item.imageAlt ?? ""} width={2400} height={1482} sizes="(max-width: 780px) 100vw, 46vw" /></a>}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section conversations-section" id="conversations" aria-labelledby="conversations-title">
+        <div className="section-heading">
+          <p className="section-number" aria-hidden="true">02</p>
+          <div><p className="eyebrow">Conversations</p><h2 id="conversations-title">Listening to people who are building.</h2></div>
+          <a href="https://www.youtube.com/@thebuildclub/videos" className="section-link" {...externalProps}>Full channel <span aria-hidden="true">↗</span></a>
+        </div>
+        <div className="conversation-intro">
+          <p className="large-copy">The Build Club is where I sit down with founders and ecosystem builders to understand the work behind their decisions.</p>
+          <a href="https://thebuildclub.in/" className="text-link" {...externalProps}>Visit The Build Club <span aria-hidden="true">↗</span></a>
+        </div>
+        <div className="episode-list">
+          {episodes.map((episode) => (
+            <a key={episode.number} href={episode.href} className="episode-entry" {...externalProps}>
+              <span className="episode-number">Episode {String(episode.number).padStart(2, "0")}</span>
+              <span className="episode-main"><strong>{episode.name}</strong><span>{episode.role}</span></span>
+              <span className="episode-topic">{episode.topic}</span><span className="episode-arrow" aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="section" id="community" aria-labelledby="community-title">
+        <div className="section-heading">
+          <p className="section-number" aria-hidden="true">03</p>
+          <div><p className="eyebrow">Community & service</p><h2 id="community-title">Creating rooms where people can contribute.</h2></div>
+        </div>
+        <div className="community-layout">
+          <div className="community-list">
+            {community.map((item) => (
+              <article className={`community-entry ${item.id}`} key={item.id}>
+                {item.id === "leaads" && <p className="impact-number" aria-label="More than one thousand meals">1,000+</p>}
+                <p className="eyebrow">{item.meta}</p><h3>{item.title}</h3><p>{item.description}</p>
+                {item.href && item.linkLabel && <a href={item.href} className="text-link" {...externalProps}>{item.linkLabel} <span aria-hidden="true">↗</span></a>}
+              </article>
+            ))}
+          </div>
+          <figure className="event-figure">
+            <Image src="/images/iit-patna-2024.jpg" alt="A panel in conversation at IIT Patna’s 2024 E-Summit AI Summit" width={1024} height={683} sizes="(max-width: 780px) 100vw, 45vw" />
+            <figcaption>A panel at IIT Patna’s E-Summit / AI Summit, 17 March 2024. My hosting work took place across specific sessions during the event. Photograph: Imaze World.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="section" id="about" aria-labelledby="about-title">
+        <div className="section-heading">
+          <p className="section-number" aria-hidden="true">04</p>
+          <div><p className="eyebrow">Background</p><h2 id="about-title">A technical education, shaped by operating.</h2></div>
+        </div>
+        <div className="about-grid">
+          <p className="large-copy">I’m most useful where a product needs both hands-on building and the operating rhythm to move from an idea to delivery.</p>
+          <div className="experience-list">
+            {experience.map((item) => (
+              <article className="experience-entry" key={`${item.organization}-${item.role}`}>
+                <div className="experience-title"><h3>{item.href ? <a href={item.href} {...externalProps}>{item.organization}</a> : item.organization}</h3><span>{item.period}</span></div>
+                <p className="experience-role">{item.role}</p><p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+        <aside className="personal-note"><p className="eyebrow">Outside work</p><p>I make time for long treks and swimming—the quieter counterweight to building and operating at speed.</p></aside>
+      </section>
+
+      <section className="contact-section" id="contact" aria-labelledby="contact-title">
+        <p className="eyebrow">Let’s work together</p><h2 id="contact-title">Building something ambitious?</h2>
+        <p>I’m always interested in useful products, difficult operating problems, and conversations with thoughtful founders.</p>
+        <div className="contact-links">
+          <a className="button button-light" href={`mailto:${profile.email}`}>{profile.email}</a>
+          <a href={profile.linkedin} {...externalProps}>LinkedIn <span aria-hidden="true">↗</span></a>
+          <a href={profile.github} {...externalProps}>GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </>
+  );
 }

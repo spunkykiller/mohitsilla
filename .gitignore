@@ -23,6 +23,7 @@
 npm-debug.log*
 yarn-debug.log*
 ts-debug.log*
+*.tsbuildinfo
 
 # local env files
 .env*.local
